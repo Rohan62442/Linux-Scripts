@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ ! -f $1 ]; then
+    echo "File $1 not found!"
+else
+	cp $1 /usr/share/backgrounds
+	mv /usr/share/backgrounds/$1 /usr/share/backgrounds/warty-final-ubuntu.png
+fi
