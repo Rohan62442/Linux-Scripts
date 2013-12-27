@@ -1,10 +1,10 @@
-**********************************************************************************************
+**********************************************************************************
 				Ubuntu Scripts
-**********************************************************************************************
+**********************************************************************************
 
 Small scripts to tweak the Ubuntu desktop experience.
 
-shelve.py - Python script for archiving using zip.
+shelve    - Python script for archiving using zip.
 newall    - Bash script for setting an image as default wallpaper and loginscreen.
 
 - Rohan Pinto

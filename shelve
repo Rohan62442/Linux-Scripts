@@ -1,73 +1,90 @@
 #!/usr/bin/python3
-import zipfile
-import os
-import sys
 
-try:
-    
-    if sys.argv[1]=='-e':
-        assert os.path.exists(sys.argv[2])
-        zf=zipfile.ZipFile(sys.argv[2],'a',zipfile.ZIP_DEFLATED, allowZip64=True)
-        for x in zf.namelist():
-            zf.extract(x)
-        zf.close()
+def zipextract(fname):
+	assert os.path.exists(fname)
+	zf=zipfile.ZipFile(fname,'a',zipfile.ZIP_DEFLATED, allowZip64=True)
+	for x in zf.namelist():
+		zf.extract(x)
+	zf.close()
 
-    elif sys.argv[1]=='-l':
-        assert os.path.exists(sys.argv[2])
-        zf=zipfile.ZipFile(sys.argv[2],'a',zipfile.ZIP_DEFLATED, allowZip64=True)
-        print("\nNAME\t\t\tFILE SIZE\t\tCOMPRESSED SIZE\n***************************************************************")
-        for x in zf.namelist():
-            print(str(zf.getinfo(x).filename)+"\t\t"+str(zf.getinfo(x).file_size)+"\t\t\t"+str(zf.getinfo(x).compress_size))
-        zf.close()
+def zipappend(fname,fileList,directList):
+	if not fname.endswith('.zip'):
+		zf=zipfile.ZipFile(fname+'.zip','a',zipfile.ZIP_DEFLATED, allowZip64=True)
+	else:
+		zf=zipfile.ZipFile(fname,'a',zipfile.ZIP_DEFLATED, allowZip64=True)
+	for x in fileList:
+		zf.write(x)
+	for x in directList:
+		for dirname, subdirs, files in os.walk(x):
+			zf.write(dirname)
+			for filename in files:
+				zf.write(os.path.join(dirname, filename))
+	zf.close()
 
-    elif sys.argv[1]=='-a':
-        if not sys.argv[2].endswith('.zip'):
-            zf=zipfile.ZipFile(sys.argv[2]+'.zip','a',zipfile.ZIP_DEFLATED, allowZip64=True)
-        else:
-            zf=zipfile.ZipFile(sys.argv[2],'a',zipfile.ZIP_DEFLATED, allowZip64=True)
-        fileList=[]
-        directList=[]
-        for i in range(3,len(sys.argv)):
-            if os.path.isdir(sys.argv[i]):
-                directList.append(sys.argv[i])
-            else:
-                fileList.append(sys.argv[i])
-        for x in fileList:
-            zf.write(x)
-        for x in directList:
-            for dirname, subdirs, files in os.walk(x):
-                zf.write(dirname)
-                for filename in files:
-                    zf.write(os.path.join(dirname, filename))
-        zf.close()
+def ziplister(fname):
+	assert os.path.exists(fname)
+	zf=zipfile.ZipFile(fname,'a',zipfile.ZIP_DEFLATED, allowZip64=True)
+	print("\nNAME\t\t\tFILE SIZE\t\tCOMPRESSED SIZE\n***************************************************************")
+	for x in zf.namelist():
+		print(str(zf.getinfo(x).filename)+"\t\t"+str(zf.getinfo(x).file_size)+"\t\t\t"+str(zf.getinfo(x).compress_size))
+	zf.close()
 
-    elif sys.argv[1]=='-f':
-        assert os.path.exists(sys.argv[2])
-        zf=zipfile.ZipFile(sys.argv[2],'a',zipfile.ZIP_DEFLATED, allowZip64=True)
-        fileList=[]
-        for i in range(3,len(sys.argv)):
-            if zf.namelist().count(sys.argv[i]+'/')!=0:
-                temp=sys.argv[i]
-                temp+='/'
-                fileList.append(temp)
-                for x in zf.namelist():
-                    if temp==x[:len(temp)]:
-                        fileList.append(x)
-            else:
-                fileList.append(sys.argv[i])
-        for x in fileList:
-            zf.extract(x)
-        zf.close()
+def zipsingle(fname):
+	assert os.path.exists(fname)
+	zf=zipfile.ZipFile(fname,'a',zipfile.ZIP_DEFLATED, allowZip64=True)
+	fileList=[]
+	for i in range(3,len(sys.argv)):
+		if zf.namelist().count(sys.argv[i]+'/')!=0:
+			temp=sys.argv[i]
+			temp+='/'
+			fileList.append(temp)
+			for x in zf.namelist():
+				if temp==x[:len(temp)]:
+					fileList.append(x)
+		else:
+			fileList.append(sys.argv[i])
+	for x in fileList:
+		zf.extract(x)
+	zf.close()
 
-    else:
-        print("Error: Incorrect options given.")
-        
-except AssertionError:
-    print("The archive does not exist.")
-except KeyError:
-    print("Atleast one file/directory specified does not exist in the archive.")
-except FileNotFoundError:
-    print("Atleast one file/directory specified does not exist.")
-    os.remove(sys.argv[2])
-except zipfile.BadZipFile:
-    print("Bad Zip File.")
+def ziphelp():
+	print("""shelve - Command line zip archive utility.\n\nUsage:\n\tshelve [options] [.zip file] files...\n\nOptions:\n\t-e\t-\tExtract all files from archive.\n\t-a\t-\tAppend files to archive.\n\t-l\t-\tList all files in archive.\n\t-f\t-\tExtract certain files from archive.\n\t-h\t-\tShelve help.""")
+
+def mainfunc():
+	if sys.argv[1]=='-e':
+		zipextract(sys.argv[2])
+	elif sys.argv[1]=='-a':
+		fileList=[]
+		directList=[]
+		for i in range(3,len(sys.argv)):
+			if os.path.isdir(sys.argv[i]):
+				directList.append(sys.argv[i])
+			else:
+				fileList.append(sys.argv[i])
+		zipappend(sys.argv[2],fileList,directList)
+	elif sys.argv[1]=='-l':
+		ziplister(sys.argv[2])
+	elif sys.argv[1]=='-f':
+		zipsingle(sys.argv[2])
+	elif sys.argv[1]=='-h' or sys.argv[1]=='--help':
+		ziphelp()
+	else:
+		print("Incorrect options specified.")
+
+if __name__=='__main__':
+	try:
+		import zipfile
+		import os
+		import sys
+		mainfunc()
+	except AssertionError:
+		print("The archive does not exist.")
+	except KeyError:
+		print("Atleast one file/directory specified does not exist in the archive.")
+	except FileNotFoundError:
+		print("Atleast one file/directory specified does not exist.")
+		os.remove(sys.argv[2])
+	except zipfile.BadZipFile:
+		print("Bad Zip File.")
+	except IndexError:
+		ziphelp()
