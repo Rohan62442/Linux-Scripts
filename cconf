@@ -1,0 +1,57 @@
+#!/bin/bash -
+
+if [[ $1 == *.desktop ]]
+then
+	fname=$1
+else
+	fname=$1.desktop
+fi
+touch $fname
+echo "[Desktop Entry]" > $fname
+
+function entries() {
+	echo -n "$1="
+	read x
+	if [ -n "$x" ] 
+	then
+		echo "$1=$x" >> $fname
+	fi
+}
+
+entries Name
+entries Exec
+entries Icon
+entries Terminal
+entries Type
+entries Categories
+entries MimeType
+entries Action
+entries StartupNotify
+
+entries Comment
+entries Keywords
+entries GenericName
+
+entries OnlyShowIn
+entries NotShowIn
+
+entries X-GNOME-Bugzilla-Bugzilla
+entries X-GNOME-Bugzilla-Product
+entries X-GNOME-Bugzilla-Component
+entries X-GNOME-Bugzilla-Version
+entries X-GNOME-UsesNotifications
+entries X-GNOME-Settings-Panel
+entries X-GNOME-FullName
+entries X-GNOME-Gettext-Domain
+
+entries X-Unity-IconBackgroundColor
+entries X-Ayatana-Appmenu-Show-Stubs
+entries X-GIO-NoFuse
+
+entries X-Ubuntu-Gettext-Domain
+
+echo >> $fname
+echo
+echo "<--Config File Begins Here-->"
+cat $fname
+echo "<---Config File Ends Here--->"

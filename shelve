@@ -69,7 +69,7 @@ def mainfunc():
 	elif sys.argv[1]=='-h' or sys.argv[1]=='--help':
 		ziphelp()
 	else:
-		print("Incorrect options specified.")
+		print("Incorrect options specified.\nTry 'shelve -h' or 'shelve --help' for help.")
 
 if __name__=='__main__':
 	try:
