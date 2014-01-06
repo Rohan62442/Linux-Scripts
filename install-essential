@@ -1,0 +1,51 @@
+#!/bin/bash -
+
+if [[ $EUID -ne 0 ]]; then
+	echo "install-essential: This script must be run as root."
+	exit 1
+fi
+
+function installer() {
+	for pack
+	do
+		apt-get install $pack
+	done
+}
+
+function remover() {
+	for pack
+	do
+		apt-get remove --purge $pack
+	done
+}
+
+apt-get update
+apt-get upgrade
+
+#INSTALLATIONS
+
+#Miscellaneous
+installer ubuntu-restricted-extras ubuntu-restricted-addons
+installer unity-tweak-tool gimp synaptic
+installer fbreader gnome-mplayer font-manager
+installer gweled transmageddon cx-freeze
+
+#Printing and Scanning
+installer avahi-utils libcups2 cups libcups2-dev cups-bsd cups-client 
+installer libcupsimage2-dev libdbus-1-dev build-essential ghostscript
+installer openssl libjpeg-dev libsnmp-dev libtool libusb-1.0.0-dev xsane
+installer python-imaging policykit-1 policykit-1-gnome gtk2-engines-pixbuf
+installer python-qt4 python-qt4-dbus python-dbus python-gobject python-dev
+installer python-notify python python-reportlab libsane libsane-dev sane-utils 
+
+installer openjdk-7-jdk openjdk-7-jre icedtea-7-jre-jamvm java-common			#Java
+installer p7zip-full unrar														#Archiving
+installer flashplugin-installer													#Flash
+installer compizconfig-settings-manager											#ccsm
+installer gufw lynis rkhunter chkrootkit gnupg gnupg-agent						#Security
+installer git git-man															#Git
+
+#REMOVALS
+
+remover totem totem-plugins totem-mozilla										#Totem player
+remover unity-scope-gdrive														#Unity scopes
