@@ -1,4 +1,16 @@
 #!/bin/bash -
+#----------------------------------------------------------------
+#Shell script to install essential packages in Ubuntu desktop.
+#In addition to this, it also removes unnecessary packages. This
+#script requires root level privileges.
+#----------------------------------------------------------------
+#This script is licensed under the terms of the GNU General 
+#Public license version 3. If you don't have a copy of the
+#license, it is available at http://www.gnu.org/licenses/gpl.html
+#----------------------------------------------------------------
+#Author: Rohan Pinto
+#Email: rohan62442@hotmail.com
+#----------------------------------------------------------------
 
 if [[ $EUID -ne 0 ]]; then
 	echo "install-essential: This script must be run as root."
@@ -38,8 +50,17 @@ installer python-imaging policykit-1 policykit-1-gnome gtk2-engines-pixbuf
 installer python-qt4 python-qt4-dbus python-dbus python-gobject python-dev
 installer python-notify python python-reportlab libsane libsane-dev sane-utils 
 
+#Multimedia Codecs and DVD playback
+installer gstreamer0.10-plugins-ugly gstreamer0.10-ffmpeg
+installer mencoder libdvdread4 icedax gstreamer0.10-plugins-bad-multiverse
+installer libmad0 gstreamer0.10-plugins-bad
+if [ -e /usr/share/doc/libdvdread4/install-css.sh ] && [ -x /usr/share/doc/libdvdread4/install-css.sh ]
+then
+	/usr/share/doc/libdvdread4/install-css.sh
+fi
+
 installer openjdk-7-jdk openjdk-7-jre icedtea-7-jre-jamvm java-common			#Java
-installer p7zip-full unrar														#Archiving
+installer p7zip-full unrar p7zip p7zip-rar cabextract zip unzip					#Archiving
 installer flashplugin-installer													#Flash
 installer compizconfig-settings-manager											#ccsm
 installer gufw lynis rkhunter chkrootkit gnupg gnupg-agent						#Security

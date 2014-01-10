@@ -1,4 +1,15 @@
 #!/bin/bash -
+#----------------------------------------------------------------
+#Shell script to create Ubuntu desktop configuration files.
+#These files are of the type, application/x-desktop.
+#----------------------------------------------------------------
+#This script is licensed under the terms of the GNU General 
+#Public license version 3. If you don't have a copy of the
+#license, it is available at http://www.gnu.org/licenses/gpl.html
+#----------------------------------------------------------------
+#Author: Rohan Pinto
+#Email: rohan62442@hotmail.com
+#----------------------------------------------------------------
 
 if [[ $1 == *.desktop ]]
 then

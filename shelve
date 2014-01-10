@@ -1,4 +1,15 @@
 #!/usr/bin/python3
+#-------------------------------------------------------------------
+#Python script to archive files & folders using zip library.
+#It allows you to archive, extract and list files from/in zip files.
+#-------------------------------------------------------------------
+#This script is licensed under the terms of the GNU General Public
+#license version 3. If you don't have a copy of the license, it is
+#available at http://www.gnu.org/licenses/gpl.html
+#-------------------------------------------------------------------
+#Author: Rohan Pinto
+#Email: rohan62442@hotmail.com
+#-------------------------------------------------------------------
 
 def zipextract(fname):
 	assert os.path.exists(fname)
@@ -88,3 +99,4 @@ if __name__=='__main__':
 		print("Bad Zip File.")
 	except IndexError:
 		ziphelp()
+		

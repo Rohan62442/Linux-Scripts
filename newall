@@ -1,13 +1,25 @@
 #!/bin/bash -
+#--------------------------------------------------------------------
+#Shell script to set an image as both wallpaper and loginscreen.
+#This script will prompt for superuser password since two commands 
+#require root privileges.
+#--------------------------------------------------------------------
+#This script is licensed under the terms of the GNU General Public
+#license version 3. If you don't have a copy of the license, it is
+#available at http://www.gnu.org/licenses/gpl.html
+#--------------------------------------------------------------------
+#Author: Rohan Pinto
+#Email: rohan62442@hotmail.com
+#--------------------------------------------------------------------
 
-if [[ $EUID -ne 0 ]]; then
-	echo "newall: This script must be run as root."
-	exit 1
-fi
-if [ ! -f $1 ]; then
+fname=$1
+bname=`basename $fname`
+
+if [ ! -f $fname ]; then
     echo "newall: File $1 not found!"
     exit 1
 else
-	cp $1 /usr/share/backgrounds
-	mv /usr/share/backgrounds/$1 /usr/share/backgrounds/warty-final-ubuntu.png
+	sudo cp $fname /usr/share/backgrounds
+	sudo mv /usr/share/backgrounds/$bname /usr/share/backgrounds/warty-final-ubuntu.png
 fi
+gsettings reset org.gnome.desktop.background picture-uri
