@@ -1,15 +1,24 @@
 #!/usr/bin/python3
-#-------------------------------------------------------------------
-#Python script to archive files & folders using zip library.
-#It allows you to archive, extract and list files from/in zip files.
-#-------------------------------------------------------------------
-#This script is licensed under the terms of the GNU General Public
-#license version 3. If you don't have a copy of the license, it is
-#available at http://www.gnu.org/licenses/gpl.html
-#-------------------------------------------------------------------
-#Author: Rohan Pinto
-#Email: rohan62442@hotmail.com
-#-------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#  Python script to archive files & folders using zip library.
+#  It allows you to archive, extract and list files from/in zip files.
+#-----------------------------------------------------------------------
+#  shelve is free software: you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as 
+#  published by the Free Software Foundation, either version 3 of the 
+#  License, or any later version.
+#
+#  shelve is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU General Public License for more details.                          
+#                                                                        
+#  You should have received a copy of the GNU General Public License
+#  along with shelve. If not, see http://www.gnu.org/licenses
+#-----------------------------------------------------------------------
+#  Author: Rohan Pinto
+#  Email: rohan62442@hotmail.com
+#-----------------------------------------------------------------------
 
 def zipextract(fname):
 	assert os.path.exists(fname)

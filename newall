@@ -1,16 +1,25 @@
 #!/bin/bash -
-#--------------------------------------------------------------------
-#Shell script to set an image as both wallpaper and loginscreen.
-#This script will prompt for superuser password since two commands 
-#require root privileges.
-#--------------------------------------------------------------------
-#This script is licensed under the terms of the GNU General Public
-#license version 3. If you don't have a copy of the license, it is
-#available at http://www.gnu.org/licenses/gpl.html
-#--------------------------------------------------------------------
-#Author: Rohan Pinto
-#Email: rohan62442@hotmail.com
-#--------------------------------------------------------------------
+#-----------------------------------------------------------------------
+#  Bash script to set an image as both wallpaper and loginscreen.
+#  This script will prompt for superuser password since two commands 
+#  require root privileges.
+#-----------------------------------------------------------------------
+#  newall is free software: you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as 
+#  published by the Free Software Foundation, either version 3 of the 
+#  License, or any later version.
+#
+#  newall is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU General Public License for more details.                          
+#                                                                        
+#  You should have received a copy of the GNU General Public License
+#  along with newall. If not, see http://www.gnu.org/licenses
+#-----------------------------------------------------------------------
+#  Author: Rohan Pinto
+#  Email: rohan62442@hotmail.com
+#-----------------------------------------------------------------------
 
 fname=$1
 bname=`basename $fname`

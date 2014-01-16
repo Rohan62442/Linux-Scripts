@@ -1,16 +1,25 @@
 #!/bin/bash -
-#----------------------------------------------------------------
-#Shell script to install essential packages in Ubuntu desktop.
-#In addition to this, it also removes unnecessary packages. This
-#script requires root level privileges.
-#----------------------------------------------------------------
-#This script is licensed under the terms of the GNU General 
-#Public license version 3. If you don't have a copy of the
-#license, it is available at http://www.gnu.org/licenses/gpl.html
-#----------------------------------------------------------------
-#Author: Rohan Pinto
-#Email: rohan62442@hotmail.com
-#----------------------------------------------------------------
+#-----------------------------------------------------------------------
+#  Bash script to install essential packages in Ubuntu desktop.
+#  In addition to this, it also removes unnecessary packages. This
+#  script requires root level privileges.
+#-----------------------------------------------------------------------
+#  install-essential is free software: you can redistribute it and/or
+#  modify it under the terms of the GNU General Public License as 
+#  published by the Free Software Foundation, either version 3 of the 
+#  License, or any later version.
+#
+#  install-essential is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#  GNU General Public License for more details.                          
+#                                                                        
+#  You should have received a copy of the GNU General Public License
+#  along with install-essential. If not, see http://www.gnu.org/licenses
+#-----------------------------------------------------------------------
+#  Author: Rohan Pinto
+#  Email: rohan62442@hotmail.com
+#-----------------------------------------------------------------------
 
 if [[ $EUID -ne 0 ]]; then
 	echo "install-essential: This script must be run as root."
@@ -58,6 +67,7 @@ if [ -e /usr/share/doc/libdvdread4/install-css.sh ] && [ -x /usr/share/doc/libdv
 then
 	/usr/share/doc/libdvdread4/install-css.sh
 fi
+installer libavformat-extra-53 libavcodec-extra-53
 
 installer openjdk-7-jdk openjdk-7-jre icedtea-7-jre-jamvm java-common			#Java
 installer p7zip-full unrar p7zip p7zip-rar cabextract zip unzip					#Archiving
@@ -65,6 +75,7 @@ installer flashplugin-installer													#Flash
 installer compizconfig-settings-manager											#ccsm
 installer gufw lynis rkhunter chkrootkit gnupg gnupg-agent						#Security
 installer git git-man															#Git
+installer libc6:i386 libstdc++6:i386 zlib1g:i386								#x86 libs for ADT
 
 #REMOVALS
 
