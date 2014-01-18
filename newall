@@ -21,6 +21,11 @@
 #  Email: rohan62442@hotmail.com
 #-----------------------------------------------------------------------
 
+if [[ $EUID -eq 0 ]]; then
+	echo "newall: This script must not be run as root. It will prompt you for the root password."
+	exit 1
+fi
+
 fname=$1
 bname=`basename $fname`
 
