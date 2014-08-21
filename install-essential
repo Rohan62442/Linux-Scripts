@@ -47,8 +47,8 @@ apt-get upgrade
 
 #Miscellaneous
 installer ubuntu-restricted-extras ubuntu-restricted-addons
-installer unity-tweak-tool gimp synaptic
-installer fbreader gnome-mplayer font-manager
+installer unity-tweak-tool gimp synaptic checkinstall
+installer fbreader gnome-mplayer mesa-utils dkms
 installer gweled transmageddon cx-freeze
 
 #Printing and Scanning
@@ -74,7 +74,7 @@ installer p7zip-full unrar p7zip p7zip-rar cabextract zip unzip					#Archiving
 installer flashplugin-installer													#Flash
 installer compizconfig-settings-manager											#ccsm
 installer gufw lynis rkhunter chkrootkit gnupg gnupg-agent						#Security
-installer git git-man															#Git
+installer git git-man subversion mercurial										#VCS
 installer libc6:i386 libstdc++6:i386 zlib1g:i386								#x86 libs for ADT
 
 #REMOVALS
